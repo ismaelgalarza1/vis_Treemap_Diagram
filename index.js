@@ -8,7 +8,8 @@ let movieData
 
 //call canvas 
 let canvas = d3.select('#canvas')
-console.log(d3)
+
+console.log(d3) // <----- (troubleshooting) console.log to display d3 had issues loading it in the console  
 
 //create the drawing for the tree map
 let createTreeMap = () => {
@@ -22,7 +23,7 @@ d3.json(movieDataURL).then((data,error) => {
         console.log(error)
     } else {
         movieData = data 
-        console.log(movieData)
+        console.log(movieData) // <-----(troubleshooting) console.log to display d3 I had issues loading data to the console 
         createTreeMap();
 
     }
