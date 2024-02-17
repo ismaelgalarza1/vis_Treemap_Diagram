@@ -8,6 +8,7 @@ let movieData
 
 //call canvas 
 let canvas = d3.select('#canvas')
+let tooltip = d3.select('#tooltip')
 
 console.log(d3) // <----- (troubleshooting) console.log to display d3 had issues loading it in the console  
 
@@ -69,6 +70,20 @@ let createTreeMap = () => {
             return movie['x1'] - movie['x0']
         }).attr('height', (movie) => {
             return movie['y1'] - movie['y0']
+        })
+        .on('mouseover', (movie) => {
+            tooltip.transition().style('visibility', 'visible')
+                
+            let revenue = movie['data']['value'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") //format the revenue for the end user.
+
+            tooltip.html(
+                '$ ' + revenue + '<hr />' + movie['data']['name']
+            )
+            tooltip.attr('data-value', movie['data']['value'])
+        })
+        .on('mouseout', (movie) => {
+            tooltip.transition()
+                    .style('visibility', 'hidden')
         })
 // append block to add text inside of the tiles 
 
